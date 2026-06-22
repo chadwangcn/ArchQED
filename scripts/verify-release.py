@@ -7,6 +7,9 @@ import re
 import sys
 from pathlib import Path
 
+CANONICAL_BOOTSTRAP_URL = "https://raw.githubusercontent.com/chadwangcn/ArchQED/main/BOOTSTRAP.md"
+CANONICAL_STABLE_URL = "https://raw.githubusercontent.com/chadwangcn/ArchQED/main/stable.json"
+
 
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
@@ -24,14 +27,19 @@ def main() -> int:
         return 2
     version = match.group(1)
     actual = hashlib.sha256(bootstrap_path.read_bytes()).hexdigest()
-    expected = manifest.get("bootstrap_sha256")
     errors = []
     if manifest.get("version") != version:
         errors.append(f"manifest version {manifest.get('version')} != runtime version {version}")
-    if manifest.get("release_ref") != f"v{version}":
-        errors.append(f"release_ref {manifest.get('release_ref')} != v{version}")
-    if expected != actual:
-        errors.append(f"BOOTSTRAP.md sha256 {actual} != manifest {expected}")
+    if manifest.get("release_ref") != "stable-channel":
+        errors.append("release_ref must be stable-channel")
+    if manifest.get("bootstrap_url") != CANONICAL_BOOTSTRAP_URL:
+        errors.append("bootstrap_url is not the permanent main/BOOTSTRAP.md URL")
+    if manifest.get("stable_url") != CANONICAL_STABLE_URL:
+        errors.append("stable_url is not the permanent main/stable.json URL")
+    if manifest.get("bootstrap_sha256") != actual:
+        errors.append(f"BOOTSTRAP.md sha256 {actual} != manifest {manifest.get('bootstrap_sha256')}")
+    if f"/v{version}/BOOTSTRAP.md" in bootstrap_path.read_text(encoding="utf-8"):
+        errors.append("BOOTSTRAP.md contains a versioned public entry URL")
     if errors:
         for error in errors:
             print(error, file=sys.stderr)

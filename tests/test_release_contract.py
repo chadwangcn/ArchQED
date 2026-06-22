@@ -10,6 +10,8 @@ from archqed.templates import MANAGED_FILES
 
 
 ROOT = Path(__file__).resolve().parents[1]
+CANONICAL_BOOTSTRAP_URL = "https://raw.githubusercontent.com/chadwangcn/ArchQED/main/BOOTSTRAP.md"
+CANONICAL_STABLE_URL = "https://raw.githubusercontent.com/chadwangcn/ArchQED/main/stable.json"
 
 
 class ReleaseContractTests(unittest.TestCase):
@@ -17,17 +19,22 @@ class ReleaseContractTests(unittest.TestCase):
         manifest = json.loads((ROOT / "release-manifest.json").read_text())
         bootstrap = (ROOT / "BOOTSTRAP.md").read_bytes()
         self.assertEqual(manifest["version"], __version__)
-        self.assertEqual(manifest["release_ref"], f"v{__version__}")
+        self.assertEqual(manifest["release_ref"], "stable-channel")
+        self.assertEqual(manifest["bootstrap_url"], CANONICAL_BOOTSTRAP_URL)
+        self.assertEqual(manifest["stable_url"], CANONICAL_STABLE_URL)
         self.assertEqual(manifest["bootstrap_sha256"], hashlib.sha256(bootstrap).hexdigest())
         self.assertEqual(set(manifest["adapters"]), set(ADAPTERS))
         self.assertTrue(manifest["project_neutral"])
 
-    def test_one_link_protocol_is_pinned_and_self_contained(self):
+    def test_one_link_protocol_is_permanent_but_install_is_pinned(self):
         text = (ROOT / "BOOTSTRAP.md").read_text()
-        self.assertIn("raw.githubusercontent.com/chadwangcn/ArchQED/v0.2.0/BOOTSTRAP.md", text)
-        self.assertIn("git clone --depth 1 --branch v0.2.0", text)
+        self.assertIn(CANONICAL_BOOTSTRAP_URL, text)
+        self.assertIn(CANONICAL_STABLE_URL, text)
+        self.assertIn("checkout --detach", text)
+        self.assertIn("stable.json", text)
         self.assertIn("EVD-BOOTSTRAP", text)
         self.assertIn("PowerShell", text)
+        self.assertNotRegex(text, r"raw\.githubusercontent\.com/chadwangcn/ArchQED/v\d+\.\d+\.\d+/BOOTSTRAP\.md")
 
     def test_core_is_not_coupled_to_a_named_business_project(self):
         paths = [ROOT / "src", ROOT / "docs", ROOT / "README.md", ROOT / "README.zh-CN.md", ROOT / "BOOTSTRAP.md"]

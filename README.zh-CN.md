@@ -6,20 +6,23 @@ ArchQED 是一套面向任意后端仓库的通用协议、自包含 CLI 和编�
 
 > **无证据，不完成。**
 
-## 只给编码智能体一个链接
+## 只给编码智能体一个永久链接
 
 ```text
 请在当前后端仓库中读取并严格执行：
-https://raw.githubusercontent.com/chadwangcn/ArchQED/v0.2.0/BOOTSTRAP.md
+https://raw.githubusercontent.com/chadwangcn/ArchQED/main/BOOTSTRAP.md
 ```
 
-具备公开 GitHub 访问、终端执行和仓库写权限的编码智能体会自行下载固定版本、探测后端技术栈、安装 ArchQED、自检并返回安装证据。
+这个入口不带版本号。`BOOTSTRAP.md` 会读取公开的 `stable.json`，把当前稳定版本解析为不可变 Git commit，再检出该 commit、安装 ArchQED、自检并返回安装证据。
+
+因此用户始终只需要记住一个链接，同时实际安装仍然可复现，不会直接执行持续变化的 `main` 代码。
 
 目标后端项目不需要使用 Python；只有 ArchQED 自身运行时要求 Python 3.11+。
 
 ## v0.2.0 — One-Link Bootstrap
 
-- 一个公开链接完成安装引导；
+- 永久且不带版本号的公开引导链接；
+- 稳定通道解析到不可变 Git commit；
 - 自包含运行时安装到 `.archqed/runtime/`；
 - 通用后端探测与歧义阻塞；
 - Python、Node.js、Maven、Gradle、Go、.NET、Rust、PHP、Ruby 适配器；
@@ -30,13 +33,9 @@ https://raw.githubusercontent.com/chadwangcn/ArchQED/v0.2.0/BOOTSTRAP.md
 - 保留已有 `AGENTS.md` 和 `.codex/config.toml`；
 - 对任何具体业务项目零耦合。
 
-## 手动安装
+## 安装
 
-```bash
-git clone --depth 1 --branch v0.2.0 https://github.com/chadwangcn/ArchQED.git
-cd ArchQED
-./scripts/bootstrap.sh /后端项目路径
-```
+把上面的永久链接交给具备 GitHub 访问、终端和仓库写权限的编码智能体，或者人工按照 [BOOTSTRAP.md](BOOTSTRAP.md) 执行。
 
 安装完成后：
 
@@ -49,7 +48,6 @@ cd /后端项目路径
 ## 自动开发流程
 
 ```bash
-# 修改人类可读文档
 vim docs/architecture/system.md
 vim docs/features/story-generation.md
 

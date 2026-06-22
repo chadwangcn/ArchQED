@@ -8,20 +8,23 @@ ArchQED is a project-neutral protocol, self-contained CLI, and coding-agent skil
 
 [中文说明](README.zh-CN.md) · [One-link bootstrap](BOOTSTRAP.md)
 
-## Give a coding agent one link
+## Give a coding agent one permanent link
 
 ```text
 Read and execute this protocol in the current backend repository:
-https://raw.githubusercontent.com/chadwangcn/ArchQED/v0.2.0/BOOTSTRAP.md
+https://raw.githubusercontent.com/chadwangcn/ArchQED/main/BOOTSTRAP.md
 ```
 
-A capable coding agent downloads the public release, detects the backend stack, installs a vendored ArchQED runtime and skills, initializes the control plane, runs `doctor`, and returns bootstrap evidence. The target project does not need to be Python; only the ArchQED runtime requires Python 3.11+.
+The public entry URL has no version number. `BOOTSTRAP.md` reads `stable.json`, resolves the current stable release to an immutable Git commit, checks out that exact commit, installs a vendored ArchQED runtime and skills, initializes the control plane, runs `doctor`, and returns bootstrap evidence.
+
+The target backend project does not need to use Python. Only the ArchQED runtime requires Python 3.11+.
 
 ## v0.2.0 — One-Link Bootstrap
 
-- Model-neutral bootstrap protocol at `BOOTSTRAP.md`.
+- Permanent, model-neutral bootstrap URL.
+- Stable-channel metadata resolved to an immutable Git commit.
 - Idempotent `archqed bootstrap` and safe `archqed uninstall`.
-- Self-contained vendored runtime under `.archqed/runtime/`.
+- Self-contained runtime under `.archqed/runtime/`.
 - Backend probing with evidence and ambiguity blocking.
 - Built-in adapters for Python, Node.js, Maven, Gradle, Go, .NET, Rust, PHP, and Ruby.
 - `generic` adapter for every other backend with human-reviewed commands.
@@ -32,19 +35,7 @@ A capable coding agent downloads the public release, detects the backend stack, 
 
 ## Manual installation
 
-```bash
-git clone --depth 1 --branch v0.2.0 https://github.com/chadwangcn/ArchQED.git
-cd ArchQED
-./scripts/bootstrap.sh /path/to/backend-project
-```
-
-Windows:
-
-```powershell
-git clone --depth 1 --branch v0.2.0 https://github.com/chadwangcn/ArchQED.git
-cd ArchQED
-./scripts/bootstrap.ps1 -Target C:\path\to\backend-project
-```
+Give the coding agent the permanent link above, or follow [BOOTSTRAP.md](BOOTSTRAP.md) manually. The protocol clones the public repository, resolves `stable.json`, and checks out the declared immutable commit before installation.
 
 ## Installed project workflow
 
@@ -52,7 +43,6 @@ cd ArchQED
 ./scripts/archqed doctor
 ./scripts/archqed status
 
-# Keep writing architecture for people.
 $EDITOR docs/architecture/system.md
 $EDITOR docs/features/story-generation.md
 

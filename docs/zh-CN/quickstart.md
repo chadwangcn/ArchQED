@@ -2,18 +2,13 @@
 
 ## 1. 一链接入
 
-把下面链接交给编码智能体：
+把这个永久链接交给编码智能体：
 
 ```text
-https://raw.githubusercontent.com/chadwangcn/ArchQED/v0.2.0/BOOTSTRAP.md
+https://raw.githubusercontent.com/chadwangcn/ArchQED/main/BOOTSTRAP.md
 ```
 
-或手工执行：
-
-```bash
-git clone --depth 1 --branch v0.2.0 https://github.com/chadwangcn/ArchQED.git
-./ArchQED/scripts/bootstrap.sh /你的后端项目路径
-```
+该链接会通过 `stable.json` 解析不可变 stable commit，不会直接安装移动中的 `main` 代码。
 
 ## 2. 检查安装
 
