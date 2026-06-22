@@ -2,13 +2,15 @@
 
 ## 1. 一链接入
 
-把下面链接交给编码智能体：
+把下面这个永久链接交给编码智能体：
 
 ```text
-https://raw.githubusercontent.com/chadwangcn/ArchQED/v0.2.0/BOOTSTRAP.md
+https://raw.githubusercontent.com/chadwangcn/ArchQED/main/BOOTSTRAP.md
 ```
 
-或手工执行：
+入口不带版本号，协议内部会固定实际安装的 release ref。
+
+或手工执行当前稳定版本：
 
 ```bash
 git clone --depth 1 --branch v0.2.0 https://github.com/chadwangcn/ArchQED.git
