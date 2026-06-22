@@ -1,0 +1,9 @@
+{
+  "schema_version": "1",
+  "channel": "stable",
+  "version": "0.2.0",
+  "repository": "https://github.com/chadwangcn/ArchQED",
+  "commit": "4f018130eed5600715e4431ec3866afae579a61e",
+  "bootstrap_url": "https://raw.githubusercontent.com/chadwangcn/ArchQED/main/BOOTSTRAP.md",
+  "published_at": "2026-06-22T00:00:00Z"
+}
