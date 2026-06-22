@@ -1,0 +1,25 @@
+{
+  "schema_version": "0.2",
+  "version": "0.2.0",
+  "codename": "One-Link Bootstrap",
+  "repository": "https://github.com/chadwangcn/ArchQED",
+  "release_ref": "v0.2.0",
+  "bootstrap_url": "https://raw.githubusercontent.com/chadwangcn/ArchQED/v0.2.0/BOOTSTRAP.md",
+  "bootstrap_sha256": "857471efd71fc05dfab4b08f939718651f60f010abc7866e9766e64643137985",
+  "minimum_python": "3.11",
+  "target_scope": "backend project root",
+  "project_neutral": true,
+  "runtime_install": "vendored",
+  "adapters": [
+    "python",
+    "node",
+    "java-maven",
+    "java-gradle",
+    "go",
+    "dotnet",
+    "rust",
+    "php-composer",
+    "ruby-bundler",
+    "generic"
+  ]
+}

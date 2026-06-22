@@ -10,4 +10,4 @@ verified → requires_revalidation → approved
 active → needs_recompile → approved
 ```
 
-Compiler manages generated task intent, implementer may reach only `implemented_unverified`, and verifier alone may set `verified`. Direct `task transition --to verified` is rejected.
+Compiler manages generated intent. Implementer may reach only `implemented_unverified`. The deterministic verifier alone may set `verified`. Direct transitions to `verified` are rejected.

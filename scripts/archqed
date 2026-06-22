@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PYTHON_BIN="${ARCHQED_PYTHON:-python3}"
+if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
+  echo "ArchQED requires Python 3.11+; set ARCHQED_PYTHON to a compatible interpreter." >&2
+  exit 127
+fi
+if [[ -d "$ROOT/.archqed/runtime/archqed" ]]; then
+  ARCHQED_RUNTIME="$ROOT/.archqed/runtime"
+elif [[ -d "$ROOT/src/archqed" ]]; then
+  ARCHQED_RUNTIME="$ROOT/src"
+else
+  echo "ArchQED runtime not found. Re-run the bootstrap protocol." >&2
+  exit 4
+fi
+export PYTHONPATH="$ARCHQED_RUNTIME${PYTHONPATH:+:$PYTHONPATH}"
+exec "$PYTHON_BIN" -m archqed --root "$ROOT" "$@"

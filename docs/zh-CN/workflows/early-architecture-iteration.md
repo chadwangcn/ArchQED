@@ -3,7 +3,7 @@
 项目初期使用：
 
 ```bash
-archqed set-stage discovery
+./scripts/archqed set-stage discovery
 ```
 
 ## 策略
@@ -11,22 +11,30 @@ archqed set-stage discovery
 - 架构和功能变化默认无需逐次审批；
 - 所有变化保守地按全局影响处理；
 - 一旦记录变化，开发入口关闭，直到重新编译；
-- 不追求过早的局部影响精度。
+- 不追求过早的局部影响精度；
+- 后端适配器只管理构建与测试命令，不限制架构表达。
 
 ## 连续修改
 
-第一次 `archqed sync` 产生 `CHG-A`。文档继续修改后再次运行 `archqed sync`，ArchQED 会把 `CHG-A` 标为 `superseded`，从最后已接受基线重新计算并创建 `CHG-B`。旧变更不能再审批或关闭。
+第一次 `sync` 产生 `CHG-A`。文档继续修改后再次执行：
+
+```bash
+./scripts/archqed sync
+```
+
+`CHG-A` 会成为 `superseded`，系统从最后已接受基线重新计算并创建 `CHG-B`。旧变更不能再审批或关闭。
 
 ## 回退修改
 
-文档恢复到已接受基线后运行 `archqed sync`，待处理变更会成为 `reverted`，控制状态恢复 `ready`。
+文档恢复到已接受基线后再次 `sync`，待处理变更成为 `reverted`，控制状态恢复 `ready`。
 
 ## 推荐节奏
 
 ```text
 人类连续刷新架构
 → 到可讨论节点时 sync
-→ Codex compile
+→ Compile Skill 更新控制数据
 → 只实现最小端到端闭环
+→ 独立验证
 → 再继续刷新架构
 ```

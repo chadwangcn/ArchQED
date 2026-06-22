@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/chadwangcn/ArchQED/schemas/project.schema.json",
+  "title": "ArchQED backend project configuration",
+  "type": "object",
+  "required": ["schema_version", "adapter", "commands", "requires_command_configuration"],
+  "properties": {
+    "schema_version": {"const": "0.2"},
+    "archqed_version": {"type": "string"},
+    "project_root": {"type": "string"},
+    "adapter": {
+      "type": "object",
+      "required": ["id", "label", "selected_by", "score", "evidence", "notes"],
+      "properties": {
+        "id": {"type": "string"},
+        "label": {"type": "string"},
+        "selected_by": {"enum": ["auto", "explicit", "preserved"]},
+        "score": {"type": "integer", "minimum": 0, "maximum": 100},
+        "evidence": {"type": "array", "items": {"type": "string"}},
+        "notes": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "commands": {
+      "type": "object",
+      "propertyNames": {
+        "enum": ["install", "lint", "typecheck", "unit_test", "integration_test", "build", "smoke_test"]
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": ["command", "source", "enabled"],
+        "properties": {
+          "command": {"type": "string", "minLength": 1},
+          "source": {"enum": ["detected", "human"]},
+          "enabled": {"type": "boolean"},
+          "timeout_seconds": {"type": "integer", "minimum": 1}
+        }
+      }
+    },
+    "requires_command_configuration": {"type": "boolean"}
+  },
+  "additionalProperties": true
+}

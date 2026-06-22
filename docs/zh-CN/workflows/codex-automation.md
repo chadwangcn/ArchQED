@@ -1,10 +1,10 @@
 # Codex 自动使用 ArchQED
 
-ArchQED 使用三个 Codex 原生机制。
+ArchQED 使用三类仓库级机制。
 
 ## AGENTS.md
 
-Codex 工作前读取根目录 `AGENTS.md`，因此每次运行都能看到漂移检查、单任务实现、禁止自验和反虚假规则。
+Codex 开始工作前会读取根目录 `AGENTS.md`。Bootstrap 只替换 ArchQED 托管区块，保留团队原有内容。
 
 ## Repository Skills
 
@@ -14,7 +14,7 @@ Codex 工作前读取根目录 `AGENTS.md`，因此每次运行都能看到漂�
 .agents/skills/archqed-verify/
 ```
 
-Skill 可按 description 隐式匹配，也可显式调用 `$archqed-compile`、`$archqed-implement`、`$archqed-verify`。脚本使用显式调用，减少匹配错误。
+Skill 可按 description 隐式匹配，也可显式调用 `$archqed-compile`、`$archqed-implement`、`$archqed-verify`。自动化脚本使用显式调用，减少选错流程。
 
 ## Project-scoped agents
 
@@ -24,7 +24,7 @@ Skill 可按 description 隐式匹配，也可显式调用 `$archqed-compile`、
 .codex/agents/archqed-verifier.toml
 ```
 
-## 脚本
+## 确定性入口
 
 ```bash
 ./scripts/codex-sync.sh
@@ -32,6 +32,6 @@ Skill 可按 description 隐式匹配，也可显式调用 `$archqed-compile`、
 ./scripts/codex-verify.sh TASK-ID
 ```
 
-脚本使用 `codex exec --sandbox workspace-write`。验证角色虽然需要写证据文件，但其指令明确禁止修改业务代码和测试。
+PowerShell 对应文件也会安装。验证角色需要写证据文件，因此使用 workspace-write，但其角色契约禁止修改业务代码和测试。
 
-自动化不替代人类审批、架构缺口决策和阶段切换。
+不支持 Codex Skill 发现的其他编码智能体仍可读取 `AGENTS.md`、Skill 文档、`.archqed/project.json` 和 CLI 工作流。
