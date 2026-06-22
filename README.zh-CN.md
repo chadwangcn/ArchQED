@@ -6,12 +6,14 @@ ArchQED 是一套面向任意后端仓库的通用协议、自包含 CLI 和编�
 
 > **无证据，不完成。**
 
-## 只给编码智能体一个链接
+## 只给编码智能体一个永久链接
 
 ```text
 请在当前后端仓库中读取并严格执行：
-https://raw.githubusercontent.com/chadwangcn/ArchQED/v0.2.0/BOOTSTRAP.md
+https://raw.githubusercontent.com/chadwangcn/ArchQED/main/BOOTSTRAP.md
 ```
+
+用户侧入口不再携带版本号。`BOOTSTRAP.md` 内部会固定本次安装所使用的 release ref，因此入口长期不变，安装仍然可复现。
 
 具备公开 GitHub 访问、终端执行和仓库写权限的编码智能体会自行下载固定版本、探测后端技术栈、安装 ArchQED、自检并返回安装证据。
 
