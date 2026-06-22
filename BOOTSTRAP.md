@@ -1,23 +1,24 @@
 # ArchQED One-Link Bootstrap Protocol
 
 **Protocol version:** 0.2.0  
+**Stable entry:** `https://raw.githubusercontent.com/chadwangcn/ArchQED/main/BOOTSTRAP.md`  
 **Release ref:** `v0.2.0`  
 **Scope:** any backend project root, independent of language, framework, or business project
 
-This document is an executable installation contract for coding agents. A human may provide only this URL:
+This document is the permanent, version-free installation contract for coding agents. A human may provide only this URL:
 
 ```text
-https://raw.githubusercontent.com/chadwangcn/ArchQED/v0.2.0/BOOTSTRAP.md
+https://raw.githubusercontent.com/chadwangcn/ArchQED/main/BOOTSTRAP.md
 ```
 
-A coding agent that can read public GitHub content, run terminal commands, and write the current repository must follow the protocol below.
+The permanent entry may evolve, but each published protocol pins the implementation it installs to an explicit release ref. A coding agent that can read public GitHub content, run terminal commands, and write the current repository must follow the protocol below.
 
 ## Non-negotiable rules
 
 1. Treat the current repository as the target backend project. Do not assume any project name, domain, framework, or architecture.
 2. Do not modify product code, tests, architecture meaning, dependency manifests, or build configuration during installation.
 3. Do not guess the backend adapter or project commands when detection is ambiguous.
-4. Do not install from a moving branch for reproducible use. Use release ref `v0.2.0`.
+4. Install the implementation from release ref `v0.2.0`; do not clone `main` as the runtime source.
 5. Do not report success until `doctor` passes and a bootstrap evidence file exists.
 6. Preserve existing `AGENTS.md` content and existing `.codex/config.toml`.
 7. Stop and report a precise blocker when Git, Python 3.11+, network access, or repository write access is unavailable.
