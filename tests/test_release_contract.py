@@ -14,10 +14,15 @@ CANONICAL_BOOTSTRAP_URL = "https://raw.githubusercontent.com/chadwangcn/ArchQED/
 CANONICAL_STABLE_URL = "https://raw.githubusercontent.com/chadwangcn/ArchQED/main/stable.json"
 
 
+def canonical_text_bytes(path: Path) -> bytes:
+    text = path.read_text(encoding="utf-8")
+    return text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
+
+
 class ReleaseContractTests(unittest.TestCase):
     def test_release_manifest_matches_bootstrap_and_runtime(self):
         manifest = json.loads((ROOT / "release-manifest.json").read_text())
-        bootstrap = (ROOT / "BOOTSTRAP.md").read_bytes()
+        bootstrap = canonical_text_bytes(ROOT / "BOOTSTRAP.md")
         self.assertEqual(manifest["version"], __version__)
         self.assertEqual(manifest["release_ref"], "stable-channel")
         self.assertEqual(manifest["bootstrap_url"], CANONICAL_BOOTSTRAP_URL)
