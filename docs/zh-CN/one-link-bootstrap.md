@@ -1,18 +1,19 @@
 # 一链接入任意后端项目
 
-稳定入口：
+永久入口：
 
 ```text
-https://raw.githubusercontent.com/chadwangcn/ArchQED/v0.2.0/BOOTSTRAP.md
+https://raw.githubusercontent.com/chadwangcn/ArchQED/main/BOOTSTRAP.md
 ```
 
-把这一条链接交给具备 GitHub 访问、终端和仓库写权限的编码智能体即可。该文档包含固定版本、前置条件、POSIX/PowerShell 命令、歧义处理和安装证据要求。
+把这一条链接交给具备 GitHub 访问、终端和仓库写权限的编码智能体即可。用户侧链接不带版本号；协议内部会固定实际安装的 release ref。
 
 ## 智能体会完成什么
 
 ```text
 确认当前后端仓库根目录
-→ 克隆 ArchQED v0.2.0 到临时目录
+→ 读取 main/BOOTSTRAP.md
+→ 按协议克隆固定 release ref 到临时目录
 → 探测后端技术栈
 → 安装自包含运行时、Skills、Agents 和脚本
 → 初始化 .archqed 与 .ai-control
@@ -23,9 +24,15 @@ https://raw.githubusercontent.com/chadwangcn/ArchQED/v0.2.0/BOOTSTRAP.md
 
 ArchQED 不会在安装过程中修改业务代码、依赖清单或构建配置。
 
-## 可复现性
+## 入口稳定与安装可复现
 
-正式使用固定 `v0.2.0`，不要把 `main` 作为生产安装来源。相同 tag 对应相同协议和代码。
+永久入口始终使用 `main/BOOTSTRAP.md`。该协议文档内部声明稳定 release ref，例如 `v0.2.0`，安装代码从该 ref 获取，而不是直接把 `main` 当运行时来源。
+
+因此同时满足：
+
+- 人类和大模型始终使用同一个链接；
+- 每次正式协议都能固定实际安装版本；
+- 升级只需要更新入口协议，不需要用户更换链接。
 
 ## 探测歧义
 
