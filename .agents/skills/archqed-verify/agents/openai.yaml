@@ -1,0 +1,6 @@
+interface:
+  display_name: "ArchQED Verify"
+  short_description: "Independently prove or reject task completion"
+  default_prompt: "Verify the specified ArchQED task without changing implementation or tests."
+policy:
+  allow_implicit_invocation: true
