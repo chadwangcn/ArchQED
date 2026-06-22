@@ -3,7 +3,7 @@
   "channel": "stable",
   "version": "0.2.0",
   "repository": "https://github.com/chadwangcn/ArchQED",
-  "commit": "4f018130eed5600715e4431ec3866afae579a61e",
+  "commit": "41aa976c0d54a6cf76b48a5e4be736a0b4f3a65b",
   "bootstrap_url": "https://raw.githubusercontent.com/chadwangcn/ArchQED/main/BOOTSTRAP.md",
-  "published_at": "2026-06-22T00:00:00Z"
+  "published_at": "2026-06-22T10:50:00Z"
 }
