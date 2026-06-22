@@ -10,7 +10,6 @@ from archqed.bootstrap import bootstrap_project, uninstall_project
 from archqed.checks import run_project_checks
 from archqed.doctor import doctor_project
 from archqed.errors import GateError
-from archqed.io import read_json
 
 
 class BootstrapTests(unittest.TestCase):
@@ -26,13 +25,18 @@ class BootstrapTests(unittest.TestCase):
         self.assertTrue(result["ok"])
         self.assertEqual(result["adapter"], "go")
         self.assertTrue((root / "scripts/archqed").exists())
+        self.assertTrue((root / "scripts/archqed.ps1").exists())
         self.assertTrue((root / ".archqed/runtime/archqed/cli.py").exists())
         self.assertTrue((root / ".agents/skills/archqed-compile/SKILL.md").exists())
         self.assertTrue((root / ".codex/agents/archqed-verifier.toml").exists())
         self.assertTrue((root / result["evidence"]).exists())
         self.assertTrue(doctor_project(root)["ok"])
+        if os.name == "nt":
+            command = ["pwsh", "-NoProfile", "-File", str(root / "scripts/archqed.ps1"), "--version"]
+        else:
+            command = [str(root / "scripts/archqed"), "--version"]
         completed = subprocess.run(
-            [str(root / "scripts/archqed"), "--version"],
+            command,
             cwd=root,
             text=True,
             stdout=subprocess.PIPE,
