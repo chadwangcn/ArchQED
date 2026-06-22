@@ -11,6 +11,11 @@ CANONICAL_BOOTSTRAP_URL = "https://raw.githubusercontent.com/chadwangcn/ArchQED/
 CANONICAL_STABLE_URL = "https://raw.githubusercontent.com/chadwangcn/ArchQED/main/stable.json"
 
 
+def canonical_text_bytes(path: Path) -> bytes:
+    text = path.read_text(encoding="utf-8")
+    return text.replace("\r\n", "\n").replace("\r", "\n").encode("utf-8")
+
+
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
     manifest_path = root / "release-manifest.json"
@@ -26,7 +31,7 @@ def main() -> int:
         print("cannot read ArchQED version", file=sys.stderr)
         return 2
     version = match.group(1)
-    actual = hashlib.sha256(bootstrap_path.read_bytes()).hexdigest()
+    actual = hashlib.sha256(canonical_text_bytes(bootstrap_path)).hexdigest()
     errors = []
     if manifest.get("version") != version:
         errors.append(f"manifest version {manifest.get('version')} != runtime version {version}")
