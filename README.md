@@ -8,12 +8,14 @@ ArchQED is a project-neutral protocol, self-contained CLI, and coding-agent skil
 
 [中文说明](README.zh-CN.md) · [One-link bootstrap](BOOTSTRAP.md)
 
-## Give a coding agent one link
+## Give a coding agent one permanent link
 
 ```text
 Read and execute this protocol in the current backend repository:
-https://raw.githubusercontent.com/chadwangcn/ArchQED/v0.2.0/BOOTSTRAP.md
+https://raw.githubusercontent.com/chadwangcn/ArchQED/main/BOOTSTRAP.md
 ```
+
+The public entry URL never contains a version. The protocol itself pins the implementation it installs to a release ref, so the human-facing link stays stable while each installation remains reproducible.
 
 A capable coding agent downloads the public release, detects the backend stack, installs a vendored ArchQED runtime and skills, initializes the control plane, runs `doctor`, and returns bootstrap evidence. The target project does not need to be Python; only the ArchQED runtime requires Python 3.11+.
 
