@@ -1,4 +1,4 @@
-# Story system
+# Story backend
 
 ARCH-STORY-001
 

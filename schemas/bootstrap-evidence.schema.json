@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ArchQED bootstrap evidence",
+  "type": "object",
+  "required": ["schema_version", "id", "kind", "created_at", "archqed_version", "target", "adapter", "probe_hash", "managed_files", "doctor", "passed"],
+  "properties": {
+    "schema_version": {"const": "0.2"},
+    "id": {"type": "string"},
+    "kind": {"const": "bootstrap"},
+    "archqed_version": {"type": "string"},
+    "target": {"type": "string"},
+    "adapter": {"type": "object"},
+    "probe_hash": {"type": "string"},
+    "managed_files": {"type": "array"},
+    "doctor": {"type": "object"},
+    "passed": {"type": "boolean"}
+  },
+  "additionalProperties": true
+}

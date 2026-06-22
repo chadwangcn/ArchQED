@@ -1,1 +1,9 @@
-{"id":"TASK-STORY-001","title":"Persist and read back a generated story","status":"approved","source_refs":["ARCH-STORY-001","REQ-STORY-001"],"dependencies":[],"acceptance":[{"id":"AC-1","command":"python -m unittest discover -s tests -v"}],"forbidden":[{"id":"no-placeholder","pattern":"PLACEHOLDER|hardcoded_story","paths":["src"]}]}
+{
+  "id": "TASK-STORY-001",
+  "title": "Persist and read back a generated story",
+  "status": "approved",
+  "source_refs": ["ARCH-STORY-001", "REQ-STORY-001"],
+  "dependencies": [],
+  "acceptance": [{"id": "AC-1", "command": "python -m unittest discover -s tests -v"}],
+  "forbidden": [{"id": "no-placeholder", "pattern": "PLACEHOLDER|hardcoded_story", "paths": ["src"]}]
+}

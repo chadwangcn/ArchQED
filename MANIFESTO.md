@@ -1,10 +1,13 @@
 # The ArchQED Manifesto
 
-1. Human architecture is the source of intent.
-2. Machine contracts are derived artifacts.
-3. Change is normal, but its blast radius must be explicit.
-4. Ambiguity blocks execution instead of inviting invention.
-5. Implementation and verification are separate roles.
-6. Completion is computed from reproducible evidence.
+Software agents can produce convincing code faster than teams can establish whether it is real. ArchQED exists to make human architecture executable and completion provable across backend stacks.
+
+- Human architecture remains readable, reviewable, and owned by people.
+- Machine contracts and tasks are generated control data, not a competing design source.
+- Early architecture churn is expected; later feature refinement should remain scoped when traceability proves it.
+- Build and test commands come from repository evidence or explicit human configuration.
+- Missing decisions create questions and blocked work, not invented defaults.
+- The agent that writes code cannot award final acceptance.
+- A completion state is bound to source revision, task contract, commands, outputs, and anti-fake findings.
 
 > **No evidence, no done.**

@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  verify:
+  linux:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -20,3 +20,31 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - run: python -m pip install .
       - run: ./scripts/verify.sh
+
+  windows-bootstrap:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m pip install .
+      - name: Test adapters
+        run: python tests/test_adapters.py -v
+      - name: Test bootstrap
+        run: python tests/test_bootstrap.py -v
+      - name: Test architecture changes
+        run: python tests/test_changes.py -v
+      - name: Test evidence
+        run: python tests/test_evidence.py -v
+      - name: Test release contract
+        run: python tests/test_release_contract.py -v
+      - name: PowerShell bootstrap smoke test
+        shell: pwsh
+        run: |
+          $Target = Join-Path $env:RUNNER_TEMP "archqed-smoke"
+          New-Item -ItemType Directory -Force $Target | Out-Null
+          Set-Content -Path (Join-Path $Target "go.mod") -Value "module example.com/smoke`n`ngo 1.22`n"
+          ./scripts/bootstrap.ps1 -Target $Target
+          & (Join-Path $Target "scripts/archqed.ps1") doctor --json
+          & (Join-Path $Target "scripts/archqed.ps1") sync --check --json

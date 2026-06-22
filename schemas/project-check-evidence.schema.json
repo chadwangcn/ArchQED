@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ArchQED project-check evidence",
+  "type": "object",
+  "required": ["schema_version", "id", "kind", "source_revision", "project_configuration_hash", "passed", "results"],
+  "properties": {
+    "schema_version": {"const": "0.2"},
+    "id": {"type": "string"},
+    "kind": {"const": "project-check"},
+    "source_revision": {"type": "string"},
+    "project_configuration_hash": {"type": "string"},
+    "passed": {"type": "boolean"},
+    "results": {"type": "array"}
+  },
+  "additionalProperties": true
+}

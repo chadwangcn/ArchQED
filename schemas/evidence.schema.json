@@ -1,1 +1,17 @@
-{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"ArchQED evidence","type":"object","required":["id","task_id","source_revision","task_contract_hash","passed","acceptance_results","forbidden_findings"],"properties":{"id":{"type":"string"},"task_id":{"type":"string"},"source_revision":{"type":"string"},"task_contract_hash":{"type":"string"},"passed":{"type":"boolean"},"acceptance_results":{"type":"array"},"forbidden_findings":{"type":"array"}}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ArchQED task evidence",
+  "type": "object",
+  "required": ["id", "task_id", "source_revision", "task_contract_hash", "created_at", "passed", "acceptance_results", "forbidden_findings"],
+  "properties": {
+    "id": {"type": "string"},
+    "task_id": {"type": "string"},
+    "source_revision": {"type": "string"},
+    "task_contract_hash": {"type": "string"},
+    "created_at": {"type": "string"},
+    "passed": {"type": "boolean"},
+    "acceptance_results": {"type": "array"},
+    "forbidden_findings": {"type": "array"}
+  },
+  "additionalProperties": true
+}

@@ -2,106 +2,91 @@
 
 **Human architecture. Machine contracts. Verified software.**
 
-ArchQED is an open protocol, deterministic Python CLI, and Codex skill suite that turns human-readable architecture into controlled implementation tasks and accepts only evidence-backed completion.
+ArchQED is a project-neutral protocol, self-contained CLI, and coding-agent skill suite for any backend repository. It compiles human-readable architecture into controlled implementation tasks and accepts only evidence-backed completion.
 
 > **No evidence, no done.**
 
-[中文说明](README.zh-CN.md)
+[中文说明](README.zh-CN.md) · [One-link bootstrap](BOOTSTRAP.md)
 
-## Why
-
-Coding agents can report success after producing placeholders, mock-only paths, silent defaults, disconnected layers, or tests that never exercise the real system. ArchQED places them inside an auditable lifecycle:
+## Give a coding agent one permanent link
 
 ```text
-human architecture and feature details
-                ↓
-change detection, impact, and approval
-                ↓
-contracts, tasks, gaps, and acceptance criteria
-                ↓
-implementation agent
-                ↓
-independent verifier
-                ↓
-evidence-backed task state
+Read and execute this protocol in the current backend repository:
+https://raw.githubusercontent.com/chadwangcn/ArchQED/main/BOOTSTRAP.md
 ```
 
-## What v0.1.0 includes
+The public entry URL has no version number. `BOOTSTRAP.md` reads `stable.json`, resolves the current stable release to an immutable Git commit, checks out that exact commit, installs a vendored ArchQED runtime and skills, initializes the control plane, runs `doctor`, and returns bootstrap evidence.
 
-- `discovery`, `stabilizing`, and `delivery` change stages.
-- Repeated-edit superseding, revert handling, and stale-approval protection.
-- Global architecture impact and stable-ID-scoped feature refinement.
-- A task state machine that prevents implementation agents from setting `verified`.
-- Executable acceptance commands, forbidden-pattern scans, and evidence bundles.
-- Three repository-scoped Codex skills under `.agents/skills/`.
-- Three project-scoped Codex agents under `.codex/agents/`.
-- Chinese documentation for each workflow stage.
-- A Python 3.11+ CLI with no runtime dependencies.
+The target backend project does not need to use Python. Only the ArchQED runtime requires Python 3.11+.
 
-## Install
+## v0.2.0 — One-Link Bootstrap
 
-```bash
-git clone https://github.com/chadwangcn/ArchQED.git
-cd ArchQED
-python -m pip install .
-./scripts/verify.sh
-```
+- Permanent, model-neutral bootstrap URL.
+- Stable-channel metadata resolved to an immutable Git commit.
+- Idempotent `archqed bootstrap` and safe `archqed uninstall`.
+- Self-contained runtime under `.archqed/runtime/`.
+- Backend probing with evidence and ambiguity blocking.
+- Built-in adapters for Python, Node.js, Maven, Gradle, Go, .NET, Rust, PHP, and Ruby.
+- `generic` adapter for every other backend with human-reviewed commands.
+- Project command evidence through `archqed check`.
+- POSIX and PowerShell launchers.
+- Existing `AGENTS.md` and `.codex/config.toml` preservation.
+- No coupling to any business project.
 
-Install ArchQED into an existing project:
+## Manual installation
 
-```bash
-./scripts/install-project.sh /path/to/project discovery
-```
+Give the coding agent the permanent link above, or follow [BOOTSTRAP.md](BOOTSTRAP.md) manually. The protocol clones the public repository, resolves `stable.json`, and checks out the declared immutable commit before installation.
 
-## First lifecycle
+## Installed project workflow
 
 ```bash
-cd /path/to/project
+./scripts/archqed doctor
+./scripts/archqed status
+
 $EDITOR docs/architecture/system.md
 $EDITOR docs/features/story-generation.md
-archqed sync
-./scripts/codex-sync.sh
-./scripts/codex-next.sh
-archqed status
-```
 
-## Change stages
-
-| Stage | Architecture changes | Feature-detail changes |
-|---|---|---|
-| `discovery` | Global recompile; approval off by default | Global recompile |
-| `stabilizing` | Human approval and global impact | Scoped by stable IDs |
-| `delivery` | Human approval and global impact | Human approval and scoped revalidation |
-
-## Codex integration
-
-Codex reads `AGENTS.md`, discovers repository skills under `.agents/skills/`, and project agents under `.codex/agents/`. The wrappers use explicit skill invocation:
-
-```bash
+./scripts/archqed sync
 ./scripts/codex-sync.sh
 ./scripts/codex-next.sh
 ./scripts/codex-verify.sh TASK-ID
 ```
 
+## Adapter behavior
+
+ArchQED detects marker files and only records commands supported by project evidence. A multi-stack repository is blocked when the selection is ambiguous. Unknown stacks use `generic` and require explicit commands:
+
+```bash
+./scripts/archqed adapter configure generic \
+  --command 'unit_test=make test' \
+  --command 'build=make build'
+```
+
 ## Core commands
 
 ```text
+archqed bootstrap --target PATH [--adapter ID]
+archqed probe --target PATH
+archqed adapter list|detect|configure
+archqed check [--only NAME]
+archqed uninstall [--purge-control-data]
 archqed init
 archqed sync [--check]
 archqed status
 archqed doctor
-archqed set-stage STAGE
 archqed approve-change CHANGE-ID
 archqed compile-complete CHANGE-ID
 archqed task list|next|start|submit|transition
 archqed verify TASK-ID
 ```
 
-See the [Chinese quickstart](docs/zh-CN/quickstart.md), [change model](docs/protocol/change-model.md), [evidence model](docs/protocol/evidence-model.md), and [CLI reference](docs/reference/cli.md).
+See [Chinese quickstart](docs/zh-CN/quickstart.md), [adapter guide](docs/zh-CN/adapters.md), [one-link guide](docs/zh-CN/one-link-bootstrap.md), and [CLI reference](docs/reference/cli.md).
 
-## Status
+## Verify this repository
 
-ArchQED v0.1.0 is an alpha protocol and working reference implementation. Control-data formats may evolve before v1.0.
+```bash
+./scripts/verify.sh
+```
 
 ## License
 

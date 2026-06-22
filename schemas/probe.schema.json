@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ArchQED backend probe",
+  "type": "object",
+  "required": ["schema_version", "root", "candidates", "recommended_adapter", "ambiguous", "requires_human_selection"],
+  "properties": {
+    "schema_version": {"const": "0.2"},
+    "root": {"type": "string"},
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "score", "evidence", "commands", "notes"]
+      }
+    },
+    "recommended_adapter": {"type": ["string", "null"]},
+    "ambiguous": {"type": "boolean"},
+    "requires_human_selection": {"type": "boolean"}
+  },
+  "additionalProperties": true
+}

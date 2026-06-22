@@ -1,6 +1,6 @@
 interface:
   display_name: "ArchQED Compile"
-  short_description: "Compile architecture changes into controlled tasks"
+  short_description: "Compile backend architecture into controlled tasks"
   default_prompt: "Reconcile current ArchQED changes without writing product code."
 policy:
   allow_implicit_invocation: true
